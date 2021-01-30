@@ -1,11 +1,11 @@
 import { Link, Route } from 'wouter';
 import { Canvas } from 'react-three-fiber';
 import { OrbitControls } from '@react-three/drei';
-import BasicScene from './lessons/03-basic-scene';
-import TransformObjects from './lessons/05-transforms-objects';
-import Animations from './lessons/06-animations';
+import BasicScene from 'lessons/03-basic-scene';
+import TransformObjects from 'lessons/05-transforms-objects';
+import Animations from 'lessons/06-animations';
 
-import './App.css';
+import 'App.css';
 
 function App() {
   return (

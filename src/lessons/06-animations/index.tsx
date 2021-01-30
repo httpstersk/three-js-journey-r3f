@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Group } from 'three';
 import gsap from 'gsap';
-import Cube from '../components/Cube';
+import Cube from 'components/Cube';
 
 export default function Scene() {
   const groupRef = useRef<Group>();
