@@ -10,15 +10,13 @@ const Aside: React.FC<IProps> = ({ children }) => {
 };
 
 const Wrapper = styled.aside`
-  --margin: 0;
-  --padding: 1rem;
+  --padding: 2rem;
   background-color: transparent;
   color: #fff;
   display: flex;
   flex: 1;
   height: calc(100vh - 2 * var(--margin) * 1px);
   left: 0;
-  margin: var(--margin);
   padding: var(--padding);
   position: absolute;
   top: 0;

@@ -6,6 +6,7 @@ import TransformObjects from 'lessons/05-transforms-objects';
 import Animations from 'lessons/06-animations';
 import Aside from 'components/Aside';
 import LessonLink from 'components/LessonLink';
+import Navigation from 'components/Navigation';
 
 import 'App.css';
 
@@ -13,13 +14,13 @@ function App() {
   return (
     <main>
       <Aside>
-        <nav>
+        <Navigation>
           <LessonLink href="/lessons/03-basic-scene">Basic Scene</LessonLink>
           <LessonLink href="/lessons/05-transforms-objects">
             Transforms Objects
           </LessonLink>
           <LessonLink href="/lessons/06-animations">Animations</LessonLink>
-        </nav>
+        </Navigation>
       </Aside>
 
       <Canvas>
