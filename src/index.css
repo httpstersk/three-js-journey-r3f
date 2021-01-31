@@ -7,7 +7,7 @@ html,
 body,
 canvas {
   background-color: black;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   height: 100vh;
   margin: 0;
   padding: 0;
