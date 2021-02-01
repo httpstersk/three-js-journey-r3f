@@ -4,6 +4,7 @@ import { OrbitControls } from '@react-three/drei';
 import BasicScene from 'lessons/03-basic-scene';
 import TransformObjects from 'lessons/05-transforms-objects';
 import Animations from 'lessons/06-animations';
+import Cameras from 'lessons/07-cameras';
 import Aside from 'components/Aside';
 import LessonLink from 'components/LessonLink';
 import Navigation from 'components/Navigation';
@@ -20,6 +21,7 @@ function App() {
             Transforms Objects
           </LessonLink>
           <LessonLink href="/lessons/06-animations">Animations</LessonLink>
+          <LessonLink href="/lessons/07-cameras">Cameras</LessonLink>
         </Navigation>
       </Aside>
 
@@ -30,6 +32,7 @@ function App() {
           component={TransformObjects}
         />
         <Route path="/lessons/06-animations" component={Animations} />
+        <Route path="/lessons/07-cameras" component={Cameras} />
 
         <OrbitControls />
       </Canvas>
