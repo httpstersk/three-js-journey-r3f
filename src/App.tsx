@@ -12,30 +12,52 @@ import Navigation from 'components/Navigation';
 
 import 'App.css';
 
+const LESSONS_FOLDER = '/lessons';
+const LESSONS = [
+  {
+    title: 'Basic Scene',
+    path: `${LESSONS_FOLDER}/03-basic-scene`,
+    component: BasicScene,
+  },
+  {
+    title: 'Transforms Objects',
+    path: `${LESSONS_FOLDER}/05-transforms-objects`,
+    component: TransformObjects,
+  },
+  {
+    title: 'Animations',
+    path: `${LESSONS_FOLDER}/06-animations`,
+    component: Animations,
+  },
+  {
+    title: 'Cameras',
+    path: `${LESSONS_FOLDER}/07-cameras`,
+    component: Cameras,
+  },
+  {
+    title: 'Geometries',
+    path: `${LESSONS_FOLDER}/09-geometries`,
+    component: Geometries,
+  },
+];
+
 function App() {
   return (
     <main>
       <Aside>
         <Navigation>
-          <LessonLink href="/lessons/03-basic-scene">Basic Scene</LessonLink>
-          <LessonLink href="/lessons/05-transforms-objects">
-            Transforms Objects
-          </LessonLink>
-          <LessonLink href="/lessons/06-animations">Animations</LessonLink>
-          <LessonLink href="/lessons/07-cameras">Cameras</LessonLink>
-          <LessonLink href="/lessons/09-geometries">Geometries</LessonLink>
+          {LESSONS.map(({ path, title }) => (
+            <LessonLink href={path} key={path}>
+              {title}
+            </LessonLink>
+          ))}
         </Navigation>
       </Aside>
 
       <Canvas>
-        <Route path="/lessons/03-basic-scene" component={BasicScene} />
-        <Route
-          path="/lessons/05-transforms-objects"
-          component={TransformObjects}
-        />
-        <Route path="/lessons/06-animations" component={Animations} />
-        <Route path="/lessons/07-cameras" component={Cameras} />
-        <Route path="/lessons/09-geometries" component={Geometries} />
+        {LESSONS.map(({ component, path }) => (
+          <Route component={component} key={path} path={path} />
+        ))}
 
         <OrbitControls />
       </Canvas>
