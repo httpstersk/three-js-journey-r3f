@@ -1,11 +1,14 @@
 import { Route } from 'wouter';
 import { Canvas } from 'react-three-fiber';
 import { OrbitControls } from '@react-three/drei';
+
 import BasicScene from 'lessons/03-basic-scene';
 import TransformObjects from 'lessons/05-transforms-objects';
 import Animations from 'lessons/06-animations';
 import Cameras from 'lessons/07-cameras';
 import Geometries from 'lessons/09-geometries';
+import DebugUI from 'lessons/10-debug-ui';
+
 import Aside from 'components/Aside';
 import LessonLink from 'components/LessonLink';
 import Navigation from 'components/Navigation';
@@ -39,7 +42,14 @@ const LESSONS = [
     path: `${LESSONS_FOLDER}/09-geometries`,
     component: Geometries,
   },
+  {
+    title: 'Debug UI',
+    path: `${LESSONS_FOLDER}/10-debug-ui`,
+    component: DebugUI,
+  },
 ];
+
+
 
 function App() {
   return (
