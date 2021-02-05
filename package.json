@@ -3,7 +3,7 @@
   "version": "0.3.4",
   "private": true,
   "dependencies": {
-    "@react-three/drei": "^3.3.0",
+    "@react-three/drei": "^3.4.0",
     "gsap": "^3.6.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -14,7 +14,7 @@
     "three": "^0.125.2",
     "tweakpane": "^1.5.8",
     "use-tweaks": "^0.3.1",
-    "wouter": "^2.7.2"
+    "wouter": "^2.7.3"
   },
   "scripts": {
     "start": "react-scripts start",
