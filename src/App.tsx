@@ -8,6 +8,7 @@ import Animations from 'lessons/06-animations';
 import Cameras from 'lessons/07-cameras';
 import Geometries from 'lessons/09-geometries';
 import DebugUI from 'lessons/10-debug-ui';
+import Textures from 'lessons/11-textures';
 
 import Aside from 'components/Aside';
 import LessonLink from 'components/LessonLink';
@@ -47,9 +48,12 @@ const LESSONS = [
     path: `${LESSONS_FOLDER}/10-debug-ui`,
     component: DebugUI,
   },
+  {
+    title: 'Textures',
+    path: `${LESSONS_FOLDER}/11-textures`,
+    component: Textures,
+  },
 ];
-
-
 
 function App() {
   return (
