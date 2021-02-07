@@ -1,4 +1,4 @@
-import { Suspense, useRef } from 'react';
+import { useRef } from 'react';
 import { PerspectiveCamera } from '@react-three/drei';
 import { Group, PerspectiveCamera as PerspectiveCameraType } from 'three';
 import CubeWithTexture from 'components/CubeWithTexture';
@@ -8,10 +8,8 @@ export default function Scene() {
   const groupRef = useRef<Group>();
 
   return (
-    <Suspense fallback={null}>
-      <group ref={groupRef}>
-        <CubeWithTexture />
-      </group>
+    <group ref={groupRef}>
+      <CubeWithTexture />
 
       <PerspectiveCamera
         aspect={2}
@@ -22,6 +20,6 @@ export default function Scene() {
         position={[2, 2, 2]}
         ref={cameraRef}
       />
-    </Suspense>
+    </group>
   );
 }

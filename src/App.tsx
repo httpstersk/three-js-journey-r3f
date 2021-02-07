@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Route } from 'wouter';
 import { Canvas } from 'react-three-fiber';
 import { OrbitControls } from '@react-three/drei';
@@ -9,6 +10,7 @@ import Cameras from 'lessons/07-cameras';
 import Geometries from 'lessons/09-geometries';
 import DebugUI from 'lessons/10-debug-ui';
 import Textures from 'lessons/11-textures';
+import Materials from 'lessons/12-materials';
 
 import Aside from 'components/Aside';
 import LessonLink from 'components/LessonLink';
@@ -53,6 +55,11 @@ const LESSONS = [
     path: `${LESSONS_FOLDER}/11-textures`,
     component: Textures,
   },
+  {
+    title: 'Materials',
+    path: `${LESSONS_FOLDER}/12-materials`,
+    component: Materials,
+  },
 ];
 
 function App() {
@@ -69,9 +76,11 @@ function App() {
       </Aside>
 
       <Canvas>
-        {LESSONS.map(({ component, path }) => (
-          <Route component={component} key={path} path={path} />
-        ))}
+        <Suspense fallback={null}>
+          {LESSONS.map(({ component, path }) => (
+            <Route component={component} key={path} path={path} />
+          ))}
+        </Suspense>
 
         <OrbitControls />
       </Canvas>
