@@ -1,12 +1,6 @@
 import { useRef } from 'react';
 import { MeshProps, useFrame, useResource } from 'react-three-fiber';
-import {
-  Plane,
-  PerspectiveCamera,
-  Sphere,
-  Torus,
-  useCubeTexture,
-} from '@react-three/drei';
+import { PerspectiveCamera, useCubeTexture } from '@react-three/drei';
 import { Mesh, MeshStandardMaterial } from 'three';
 
 const SharedMesh: React.FC<Pick<MeshProps, 'material' | 'position'>> = ({
@@ -18,13 +12,13 @@ const SharedMesh: React.FC<Pick<MeshProps, 'material' | 'position'>> = ({
 
   useFrame((_, delta) => {
     if (ref.current) {
-      ref.current.rotation.x += 0.15 * delta;
-      ref.current.rotation.y += 0.1 * delta;
+      const { rotation } = ref.current;
+      rotation.x = rotation.y += 0.15 * delta;
     }
   });
 
   return (
-    <mesh attach="material" {...{ ref }} {...{ material }} {...{ position }}>
+    <mesh {...{ ref }} {...{ material }} {...{ position }}>
       {children}
     </mesh>
   );
@@ -45,21 +39,20 @@ export default function Scene() {
       <mesh>
         <meshStandardMaterial
           envMap={envMap}
-          metalness={0.5}
+          metalness={1}
           ref={material}
-          roughness={0.2}
-          attach="material"
+          roughness={0}
         />
         {material.current && (
           <group>
             <SharedMesh material={material.current} position={[-1.5, 0, 0]}>
-              <Sphere args={[0.5, 64, 64]} />
+              <sphereBufferGeometry args={[0.5, 64, 64]} />;
             </SharedMesh>
             <SharedMesh material={material.current}>
-              <Plane args={[1, 1, 100, 100]} />
+              <planeBufferGeometry args={[1, 1, 100, 100]} />
             </SharedMesh>
             <SharedMesh material={material.current} position={[1.5, 0, 0]}>
-              <Torus args={[0.3, 0.2, 64, 128]} />
+              <torusBufferGeometry args={[0.3, 0.2, 64, 128]} />
             </SharedMesh>
           </group>
         )}
