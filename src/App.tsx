@@ -11,6 +11,7 @@ import Geometries from 'lessons/09-geometries';
 import DebugUI from 'lessons/10-debug-ui';
 import Textures from 'lessons/11-textures';
 import Materials from 'lessons/12-materials';
+import Text3D from 'lessons/13-3d-text';
 
 import Aside from 'components/Aside';
 import LessonLink from 'components/LessonLink';
@@ -59,6 +60,11 @@ const LESSONS = [
     title: 'Materials',
     path: `${LESSONS_FOLDER}/12-materials`,
     component: Materials,
+  },
+  {
+    title: '3D Text',
+    path: `${LESSONS_FOLDER}/13-3d-text`,
+    component: Text3D,
   },
 ];
 
