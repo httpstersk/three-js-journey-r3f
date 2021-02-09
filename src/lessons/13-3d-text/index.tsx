@@ -1,28 +1,25 @@
-import { useMemo, useRef } from 'react';
-import { Center, PerspectiveCamera } from '@react-three/drei';
+import { useMemo } from 'react';
+import { Center, PerspectiveCamera, useTexture } from '@react-three/drei';
 import { useResource, useLoader, MeshProps } from 'react-three-fiber';
-import { FontLoader, Mesh, MeshStandardMaterial } from 'three';
+import { FontLoader, MeshStandardMaterial, Texture } from 'three';
 
 const Text: React.FC<Pick<MeshProps, 'material'>> = ({
   children,
   material,
 }) => {
-  const font = useLoader(
-    FontLoader,
-    process.env.PUBLIC_URL + '/fonts/helvetiker.typeface.json'
-  );
+  const font = useLoader(FontLoader, '/fonts/helvetiker.typeface.json');
 
   const config = useMemo(
     () => ({
       font,
       size: 0.5,
       height: 0.2,
-      curveSegments: 4,
+      curveSegments: 12,
       bevelEnabled: true,
+      bevelThickness: 0.03,
+      bevelSize: 0.02,
       bevelOffset: 0,
       bevelSegments: 5,
-      bevelSize: 0.02,
-      bevelThickness: 0.03,
     }),
     [font]
   );
@@ -37,9 +34,15 @@ const Text: React.FC<Pick<MeshProps, 'material'>> = ({
 };
 
 export default function Scene() {
+  const material = useResource<MeshStandardMaterial>();
+  const matcap = useTexture('/textures/matcaps/8.png') as Texture;
+
   return (
     <>
-      <Text>Three.js</Text>
+      <mesh>
+        <meshMatcapMaterial ref={material} matcap={matcap} />
+        {material.current && <Text material={material.current}>Good</Text>}
+      </mesh>
 
       <PerspectiveCamera
         aspect={2}
