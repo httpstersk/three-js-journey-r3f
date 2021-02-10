@@ -1,7 +1,12 @@
-import { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Center, PerspectiveCamera, useTexture } from '@react-three/drei';
 import { useResource, useLoader, MeshProps } from 'react-three-fiber';
-import { FontLoader, MeshStandardMaterial, Texture } from 'three';
+import {
+  FontLoader,
+  MeshStandardMaterial,
+  Texture,
+  TorusBufferGeometry,
+} from 'three';
 
 const Text: React.FC<Pick<MeshProps, 'material'>> = ({
   children,
@@ -33,15 +38,57 @@ const Text: React.FC<Pick<MeshProps, 'material'>> = ({
   );
 };
 
+interface DonutsProps {
+  material: MeshStandardMaterial;
+}
+
+const torus = new TorusBufferGeometry(0.3, 0.2, 20, 45);
+
+const Donuts: React.FC<DonutsProps> = ({ material }) => {
+  return (
+    <>
+      {Array(100)
+        .fill({})
+        .map((_, i) => {
+          const scale = Math.random();
+
+          return (
+            <mesh
+              geometry={torus}
+              key={i}
+              material={material}
+              position={[
+                (Math.random() - 0.5) * 10,
+                (Math.random() - 0.5) * 10,
+                (Math.random() - 0.5) * 10,
+              ]}
+              rotation={[Math.random() * Math.PI, Math.random() * Math.PI, 0]}
+              scale={[scale, scale, scale]}
+            ></mesh>
+          );
+        })}
+    </>
+  );
+};
+
 export default function Scene() {
   const material = useResource<MeshStandardMaterial>();
   const matcap = useTexture('/textures/matcaps/8.png') as Texture;
+
+  useEffect(() => {
+    Array(300).fill({});
+  }, []);
 
   return (
     <>
       <mesh>
         <meshMatcapMaterial ref={material} matcap={matcap} />
-        {material.current && <Text material={material.current}>Good</Text>}
+        {material.current && (
+          <group>
+            <Donuts material={material.current} />
+            <Text material={material.current}>Good</Text>
+          </group>
+        )}
       </mesh>
 
       <PerspectiveCamera
