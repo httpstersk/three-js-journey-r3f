@@ -1,38 +1,34 @@
 import { useRef } from 'react';
-import { MeshProps, useFrame, useResource } from 'react-three-fiber';
-import { PerspectiveCamera, useCubeTexture } from '@react-three/drei';
-import { Mesh, MeshStandardMaterial } from 'three';
-
-const SharedMesh: React.FC<Pick<MeshProps, 'material' | 'position'>> = ({
-  children,
-  material,
-  position,
-}) => {
-  const ref = useRef<Mesh>();
-
-  useFrame((_, delta) => {
-    if (ref.current) {
-      const { rotation } = ref.current;
-      rotation.x = rotation.y += 0.15 * delta;
-    }
-  });
-
-  return (
-    <mesh {...{ ref }} {...{ material }} {...{ position }}>
-      {children}
-    </mesh>
-  );
-};
+import { useFrame, useResource } from 'react-three-fiber';
+import {
+  PerspectiveCamera,
+  Plane,
+  Sphere,
+  Torus,
+  useCubeTexture,
+} from '@react-three/drei';
+import { Group, Mesh, MeshStandardMaterial } from 'three';
 
 const LIGHT_COLOR = 0xffffff;
 const LIGHT_INTESITY = 1;
 
 export default function Scene() {
+  const groupRef = useRef<Group>();
+  const meshRef = useRef<Mesh>();
   const material = useResource<MeshStandardMaterial>();
+
   const envMap = useCubeTexture(
     ['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg'],
     { path: process.env.PUBLIC_URL + '/textures/environmentMaps/0/' }
   );
+
+  useFrame((_, delta) => {
+    if (groupRef.current && meshRef.current) {
+      const groupRotation = groupRef.current.rotation;
+      const meshRotation = meshRef.current.rotation;
+      meshRotation.x = groupRotation.x = groupRotation.y += 0.15 * delta;
+    }
+  });
 
   return (
     <>
@@ -43,17 +39,26 @@ export default function Scene() {
           ref={material}
           roughness={0}
         />
+
         {material.current && (
-          <group>
-            <SharedMesh material={material.current} position={[-1.5, 0, 0]}>
-              <sphereBufferGeometry args={[0.5, 64, 64]} />;
-            </SharedMesh>
-            <SharedMesh material={material.current}>
-              <planeBufferGeometry args={[1, 1, 100, 100]} />
-            </SharedMesh>
-            <SharedMesh material={material.current} position={[1.5, 0, 0]}>
-              <torusBufferGeometry args={[0.3, 0.2, 64, 128]} />
-            </SharedMesh>
+          <group ref={groupRef}>
+            <Sphere
+              args={[0.5, 64, 64]}
+              material={material.current}
+              position={[-1.5, 0, 0]}
+            />
+
+            <Plane
+              args={[1, 1, 100, 100]}
+              material={material.current}
+              ref={meshRef}
+            />
+
+            <Torus
+              args={[0.3, 0.2, 64, 128]}
+              material={material.current}
+              position={[1.5, 0, 0]}
+            />
           </group>
         )}
       </mesh>

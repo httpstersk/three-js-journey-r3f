@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Center, PerspectiveCamera, useTexture } from '@react-three/drei';
 import { useResource, useLoader, MeshProps } from 'react-three-fiber';
 import {
@@ -42,12 +42,14 @@ interface DonutsProps {
   material: MeshStandardMaterial;
 }
 
+const DONUTS_COUNT = 100;
+
 const torus = new TorusBufferGeometry(0.3, 0.2, 20, 45);
 
 const Donuts: React.FC<DonutsProps> = ({ material }) => {
   return (
     <>
-      {Array(100)
+      {Array(DONUTS_COUNT)
         .fill({})
         .map((_, i) => {
           const scale = Math.random();
@@ -74,10 +76,6 @@ const Donuts: React.FC<DonutsProps> = ({ material }) => {
 export default function Scene() {
   const material = useResource<MeshStandardMaterial>();
   const matcap = useTexture('/textures/matcaps/8.png') as Texture;
-
-  useEffect(() => {
-    Array(300).fill({});
-  }, []);
 
   return (
     <>
