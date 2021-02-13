@@ -1,12 +1,6 @@
 import { useRef } from 'react';
 import { useFrame, useResource } from 'react-three-fiber';
-import {
-  PerspectiveCamera,
-  Plane,
-  Sphere,
-  Torus,
-  useCubeTexture,
-} from '@react-three/drei';
+import { Plane, Sphere, Torus, useCubeTexture } from '@react-three/drei';
 import { Group, Mesh, MeshStandardMaterial } from 'three';
 
 const LIGHT_COLOR = 0xffffff;
