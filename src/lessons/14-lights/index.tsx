@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Center, PerspectiveCamera, useTexture } from '@react-three/drei';
+import { Center, useTexture } from '@react-three/drei';
 import { useResource, useLoader, MeshProps } from 'react-three-fiber';
 import {
   FontLoader,

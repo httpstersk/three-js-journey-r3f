@@ -70,15 +70,6 @@ export default function Scene() {
         intensity={LIGHT_INTESITY}
         position={[2, 3, 4]}
       />
-
-      <PerspectiveCamera
-        aspect={2}
-        far={100}
-        fov={75}
-        makeDefault
-        near={0.1}
-        position={[1, 1, 2]}
-      />
     </>
   );
 }

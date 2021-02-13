@@ -12,6 +12,7 @@ import DebugUI from 'lessons/10-debug-ui';
 import Textures from 'lessons/11-textures';
 import Materials from 'lessons/12-materials';
 import Text3D from 'lessons/13-3d-text';
+import Lights from 'lessons/14-lights';
 
 import Aside from 'components/Aside';
 import LessonLink from 'components/LessonLink';
@@ -66,6 +67,11 @@ const LESSONS = [
     path: `${LESSONS_FOLDER}/13-3d-text`,
     component: Text3D,
   },
+  {
+    title: 'Lights',
+    path: `${LESSONS_FOLDER}/14-lights`,
+    component: Lights,
+  },
 ];
 
 function App() {
@@ -81,7 +87,15 @@ function App() {
         </Navigation>
       </Aside>
 
-      <Canvas>
+      <Canvas
+        camera={{
+          aspect: 2,
+          far: 100,
+          fov: 75,
+          near: 0.1,
+          position: [2, 2, 2],
+        }}
+      >
         <Suspense fallback={null}>
           {LESSONS.map(({ component, path }) => (
             <Route component={component} key={path} path={path} />

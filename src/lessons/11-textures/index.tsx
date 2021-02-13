@@ -10,16 +10,6 @@ export default function Scene() {
   return (
     <group ref={groupRef}>
       <CubeWithTexture />
-
-      <PerspectiveCamera
-        aspect={2}
-        far={100}
-        fov={75}
-        makeDefault
-        near={0.1}
-        position={[2, 2, 2]}
-        ref={cameraRef}
-      />
     </group>
   );
 }
