@@ -1,89 +1,93 @@
-import React, { useMemo } from 'react';
-import { Center, useTexture } from '@react-three/drei';
-import { useResource, useLoader, MeshProps } from 'react-three-fiber';
+import { useRef } from 'react';
+import { useResource } from 'react-three-fiber';
+import { Box, Plane, Sphere, Torus } from '@react-three/drei';
+import { Group, Mesh, MeshStandardMaterial } from 'three';
 import {
-  FontLoader,
-  MeshStandardMaterial,
-  Texture,
-  TorusBufferGeometry,
-} from 'three';
+  AmbientLight,
+  DirectionalLight,
+  HemisphereLight,
+  PointLight,
+  RectAreaLight,
+  SpotLight,
+} from 'components/lights/';
 
-const Text: React.FC<Pick<MeshProps, 'material'>> = ({
-  children,
-  material,
-}) => {
-  const font = useLoader(FontLoader, '/fonts/helvetiker.typeface.json');
-
-  const config = useMemo(
-    () => ({
-      font,
-      size: 0.5,
-      height: 0.2,
-      curveSegments: 12,
-      bevelEnabled: true,
-      bevelThickness: 0.03,
-      bevelSize: 0.02,
-      bevelOffset: 0,
-      bevelSegments: 5,
-    }),
-    [font]
-  );
-
-  return (
-    <Center>
-      <mesh material={material}>
-        <textGeometry args={[String(children), config]} />
-      </mesh>
-    </Center>
-  );
-};
-
-interface DonutsProps {
-  material: MeshStandardMaterial;
-}
-
-const DONUTS_COUNT = 100;
-
-const torus = new TorusBufferGeometry(0.3, 0.2, 20, 45);
-
-const Donuts: React.FC<DonutsProps> = ({ material }) => {
-  return (
-    <>
-      {[...Array(DONUTS_COUNT)].map((_, i) => {
-        const scale = Math.random();
-
-        return (
-          <mesh
-            geometry={torus}
-            key={i}
-            material={material}
-            position={[
-              (Math.random() - 0.5) * 10,
-              (Math.random() - 0.5) * 10,
-              (Math.random() - 0.5) * 10,
-            ]}
-            rotation={[Math.random() * Math.PI, Math.random() * Math.PI, 0]}
-            scale={[scale, scale, scale]}
-          ></mesh>
-        );
-      })}
-    </>
-  );
-};
+const CUBE_SIZE = 0.75;
+const PLANE_SIZE = 5;
 
 export default function Scene() {
+  const groupRef = useRef<Group>();
+  const meshRef = useRef<Mesh>();
   const material = useResource<MeshStandardMaterial>();
-  const matcap = useTexture('/textures/matcaps/8.png') as Texture;
 
   return (
-    <mesh>
-      <meshMatcapMaterial ref={material} matcap={matcap} />
+    <>
+      <AmbientLight args={[0xffffff, 0.5]} />
+
+      <DirectionalLight
+        color={0x00fffc}
+        intensity={0.3}
+        position={[1, 0.25, 0]}
+      />
+
+      <HemisphereLight args={[0xff0000, 0x0000ff]} intensity={0.3} />
+
+      <PointLight
+        color={0xff9000}
+        decay={2}
+        distance={10}
+        intensity={0.5}
+        position={[1, -0.5, 1]}
+      />
+
+      <RectAreaLight
+        color={0x4e00ff}
+        height={1}
+        intensity={2}
+        lookAt={[0, 0, 0]}
+        position={[-1.5, 0, 1.5]}
+        width={1}
+      />
+
+      <SpotLight
+        angle={Math.PI * 0.1}
+        color={0x78ff00}
+        decay={1}
+        distance={6}
+        intensity={0.5}
+        penumbra={0.25}
+        position={[0, 2, 3]}
+      />
+
+      <meshStandardMaterial ref={material} roughness={0.4} />
+
       {material.current && (
-        <group>
-          <Donuts material={material.current} />
-          <Text material={material.current}>Good</Text>
+        <group ref={groupRef}>
+          <Sphere
+            args={[0.5, 32, 32]}
+            material={material.current}
+            position={[-1.5, 0, 0]}
+          />
+
+          <Box
+            args={[CUBE_SIZE, CUBE_SIZE, CUBE_SIZE]}
+            material={material.current}
+            ref={meshRef}
+          />
+
+          <Torus
+            args={[0.3, 0.2, 32, 64]}
+            material={material.current}
+            position={[1.5, 0, 0]}
+          />
+
+          <Plane
+            args={[PLANE_SIZE, PLANE_SIZE]}
+            material={material.current}
+            rotation-x={-Math.PI * 0.5}
+            position-y={-0.65}
+          />
         </group>
       )}
-    </mesh>
+    </>
   );
 }

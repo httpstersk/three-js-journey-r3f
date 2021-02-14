@@ -1,4 +1,4 @@
-export const CONSTANTS = {
+const CONSTANTS = {
   EXAMPLES_HEIGHT: 8,
   EXAMPLES_PADDING: 10,
   EXAMPLES_RADIUS: 7,
@@ -7,3 +7,5 @@ export const CONSTANTS = {
   DEFAULT_LIGHT_INTENSITY: 1,
   SPEED_ROTATION: 0.01,
 };
+
+export default CONSTANTS;

@@ -88,12 +88,13 @@ function App() {
       </Aside>
 
       <Canvas
+        colorManagement={false}
         camera={{
           aspect: 2,
           far: 100,
           fov: 75,
           near: 0.1,
-          position: [2, 2, 2],
+          position: [1, 1, 2],
         }}
       >
         <Suspense fallback={null}>
