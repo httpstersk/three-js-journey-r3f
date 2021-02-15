@@ -13,6 +13,7 @@ import Textures from 'lessons/11-textures';
 import Materials from 'lessons/12-materials';
 import Text3D from 'lessons/13-3d-text';
 import Lights from 'lessons/14-lights';
+import Shadows from 'lessons/15-shadows';
 
 import Aside from 'components/Aside';
 import LessonLink from 'components/LessonLink';
@@ -72,6 +73,11 @@ const LESSONS = [
     path: `${LESSONS_FOLDER}/14-lights`,
     component: Lights,
   },
+  {
+    title: 'Shadows',
+    path: `${LESSONS_FOLDER}/15-shadows`,
+    component: Shadows,
+  },
 ];
 
 function App() {
@@ -96,6 +102,7 @@ function App() {
           near: 0.1,
           position: [1, 1, 2],
         }}
+        shadowMap
       >
         <Suspense fallback={null}>
           {LESSONS.map(({ component, path }) => (
