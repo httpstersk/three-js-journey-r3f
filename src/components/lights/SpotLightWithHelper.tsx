@@ -1,20 +1,20 @@
 import { useRef, useState } from 'react';
-import { DirectionalLight } from 'three';
+import { SpotLight } from 'three';
 import { makeButton, makeFolder, useTweaks } from 'use-tweaks';
 import CONSTANTS from 'constants/';
 
-export default function DirectionalLightWithHelper() {
+export default function SpotLightWithHelper() {
   const [isHelperShadowOn, toggleShadowHelper] = useState(false);
 
-  const { color, intensity, x, y, z } = useTweaks('Directional Light', {
+  const { color, intensity, x, y, z } = useTweaks('Spot Light', {
     color: '#ffffff',
     intensity: { value: 0.5, min: 0, max: 1 },
     ...makeFolder(
       'Positions',
       {
-        x: { value: 2, min: -5, max: 5 },
+        x: { value: 0, min: -5, max: 5 },
         y: { value: 2, min: -5, max: 5 },
-        z: { value: -1, min: -5, max: 5 },
+        z: { value: 2, min: -5, max: 5 },
       },
       true
     ),
@@ -23,22 +23,21 @@ export default function DirectionalLightWithHelper() {
     ),
   });
 
-  const lightRef = useRef<DirectionalLight>();
+  const lightRef = useRef<SpotLight>();
 
   return (
     <group>
-      <directionalLight
+      <spotLight
+        angle={Math.PI * 0.3}
         castShadow
         color={color}
+        distance={10}
         intensity={intensity}
         position={[x, y, z]}
         ref={lightRef}
-        shadow-camera-bottom={-2}
-        shadow-camera-left={-2}
-        shadow-camera-right={2}
-        shadow-camera-top={2}
         shadow-camera-far={6}
         shadow-camera-near={1}
+        shadow-camera-fov={30}
         shadow-mapSize-height={CONSTANTS.SHADOW_MAP_SIZE}
         shadow-mapSize-width={CONSTANTS.SHADOW_MAP_SIZE}
         shadow-radius={1}

@@ -2,7 +2,10 @@ import { useRef } from 'react';
 import { useResource } from 'react-three-fiber';
 import { Plane, Sphere } from '@react-three/drei';
 import { Group, MeshStandardMaterial } from 'three';
-import { DirectionalLightWithHelper } from 'components/lights/';
+import {
+  DirectionalLightWithHelper,
+  SpotLightWithHelper,
+} from 'components/lights/';
 import { useTweaks } from 'use-tweaks';
 
 const PLANE_SIZE = 5;
@@ -20,6 +23,7 @@ export default function Scene() {
   return (
     <>
       <DirectionalLightWithHelper />
+      <SpotLightWithHelper />
 
       <meshStandardMaterial
         metalness={metalness}
