@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { Route } from 'wouter';
 import { Canvas } from 'react-three-fiber';
 import { OrbitControls } from '@react-three/drei';
+import { PCFSoftShadowMap } from 'three';
 
 import BasicScene from 'lessons/03-basic-scene';
 import TransformObjects from 'lessons/05-transforms-objects';
@@ -102,7 +103,10 @@ function App() {
           near: 0.1,
           position: [1, 1, 2],
         }}
-        shadowMap
+        shadowMap={{
+          enabled: true,
+          type: PCFSoftShadowMap,
+        }}
       >
         <Suspense fallback={null}>
           {LESSONS.map(({ component, path }) => (
