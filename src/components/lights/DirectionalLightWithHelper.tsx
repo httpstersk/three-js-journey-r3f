@@ -4,7 +4,7 @@ import { makeButton, makeFolder, useTweaks } from 'use-tweaks';
 import CONSTANTS from 'constants/';
 
 export default function DirectionalLightWithHelper() {
-  const [isHelperShadowOn, toggleShadowHelper] = useState(true);
+  const [isHelperShadowOn, toggleShadowHelper] = useState(false);
 
   const { color, intensity, x, y, z } = useTweaks('Directional Light', {
     color: '#ffffff',
