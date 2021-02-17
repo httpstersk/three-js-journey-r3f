@@ -4,6 +4,7 @@ import { Plane, Sphere } from '@react-three/drei';
 import { Group, MeshStandardMaterial } from 'three';
 import {
   DirectionalLightWithHelper,
+  PointLightWithHelper,
   SpotLightWithHelper,
 } from 'components/lights/';
 import { useTweaks } from 'use-tweaks';
@@ -24,6 +25,7 @@ export default function Scene() {
     <>
       <DirectionalLightWithHelper />
       <SpotLightWithHelper />
+      <PointLightWithHelper />
 
       <meshStandardMaterial
         metalness={metalness}
