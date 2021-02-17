@@ -9,7 +9,7 @@ import {
   PointLight,
   RectAreaLight,
   SpotLight,
-} from 'components/lights/';
+} from './lights/';
 
 const CUBE_SIZE = 0.75;
 const PLANE_SIZE = 5;

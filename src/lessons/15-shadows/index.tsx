@@ -6,7 +6,7 @@ import {
   DirectionalLightWithHelper,
   PointLightWithHelper,
   SpotLightWithHelper,
-} from 'components/lights/';
+} from './lights/';
 import { useTweaks } from 'use-tweaks';
 
 const PLANE_SIZE = 5;
