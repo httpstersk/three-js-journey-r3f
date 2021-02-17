@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useResource } from 'react-three-fiber';
-import { Plane, Sphere } from '@react-three/drei';
+import { Plane, Sphere, useTexture } from '@react-three/drei';
 import { Group, MeshStandardMaterial } from 'three';
 import {
   DirectionalLightWithHelper,
@@ -8,6 +8,7 @@ import {
   SpotLightWithHelper,
 } from './lights/';
 import { useTweaks } from 'use-tweaks';
+import { Texture } from 'three';
 
 const PLANE_SIZE = 5;
 const SPHERE_SIZE = PLANE_SIZE / 10;
@@ -15,6 +16,7 @@ const SPHERE_SIZE = PLANE_SIZE / 10;
 export default function Scene() {
   const groupRef = useRef<Group>();
   const material = useResource<MeshStandardMaterial>();
+  const simpleShadow = useTexture('/textures/simpleShadow.jpg') as Texture;
 
   const { metalness, roughness } = useTweaks('Material', {
     metalness: { value: 0, min: 0, max: 1 },
@@ -50,6 +52,19 @@ export default function Scene() {
           />
         </group>
       )}
+
+      <Plane
+        args={[1.5, 1.5]}
+        receiveShadow
+        rotation-x={-Math.PI * 0.5}
+        position-y={-SPHERE_SIZE + 0.01}
+      >
+        <meshBasicMaterial
+          color={0x000000}
+          alphaMap={simpleShadow}
+          transparent={true}
+        />
+      </Plane>
     </>
   );
 }

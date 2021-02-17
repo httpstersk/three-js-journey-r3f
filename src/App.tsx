@@ -104,7 +104,7 @@ function App() {
           position: [1, 1, 2],
         }}
         shadowMap={{
-          enabled: true,
+          enabled: false,
           type: PCFSoftShadowMap,
         }}
       >
