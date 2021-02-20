@@ -15,6 +15,7 @@ import Materials from 'lessons/12-materials';
 import Text3D from 'lessons/13-3d-text';
 import Lights from 'lessons/14-lights';
 import Shadows from 'lessons/15-shadows';
+import HauntedHouse from 'lessons/16-haunted-house';
 
 import Aside from 'components/Aside';
 import LessonLink from 'components/LessonLink';
@@ -78,6 +79,11 @@ const LESSONS = [
     title: 'Shadows',
     path: `${LESSONS_FOLDER}/15-shadows`,
     component: Shadows,
+  },
+  {
+    title: 'Haunted House',
+    path: `${LESSONS_FOLDER}/16-haunted-house`,
+    component: HauntedHouse,
   },
 ];
 
