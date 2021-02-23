@@ -6,9 +6,10 @@ import {
   Group,
   Texture,
 } from 'three';
+import Roof from './Roof';
 
 const WALLS_SIZE = 4;
-const WALLS_HEIGHT = 2.5;
+export const WALLS_HEIGHT = 2.5;
 
 export default function House() {
   const wallsRef = useRef<Group>();
@@ -38,10 +39,13 @@ export default function House() {
 
   return (
     <group ref={houseRef}>
+      <Roof />
+
       <Box
         args={[WALLS_SIZE, WALLS_HEIGHT, WALLS_SIZE]}
         castShadow
         ref={wallsRef}
+        rotation-y={Math.PI * 0.25}
         position-y={WALLS_HEIGHT / 2}
       >
         <meshStandardMaterial
