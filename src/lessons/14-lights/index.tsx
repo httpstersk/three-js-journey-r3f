@@ -1,6 +1,6 @@
+import { Box, Plane, Sphere, Torus } from '@react-three/drei';
 import { useRef } from 'react';
 import { useResource } from 'react-three-fiber';
-import { Box, Plane, Sphere, Torus } from '@react-three/drei';
 import { Group, Mesh, MeshStandardMaterial } from 'three';
 import {
   AmbientLight,

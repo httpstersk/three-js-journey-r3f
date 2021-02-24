@@ -1,8 +1,9 @@
-import { Suspense } from 'react';
-import { Route } from 'wouter';
-import { Canvas } from 'react-three-fiber';
 import { OrbitControls } from '@react-three/drei';
+import { Suspense } from 'react';
+import { Canvas } from 'react-three-fiber';
 import { PCFSoftShadowMap } from 'three';
+import { proxy, useProxy } from 'valtio';
+import { Route } from 'wouter';
 
 import BasicScene from 'lessons/03-basic-scene';
 import TransformObjects from 'lessons/05-transforms-objects';
@@ -22,6 +23,12 @@ import LessonLink from 'components/LessonLink';
 import Navigation from 'components/Navigation';
 
 import 'App.css';
+
+export const state = proxy({
+  colorManagement: true,
+  shadowMapEnabled: false,
+  shadowMapType: PCFSoftShadowMap,
+});
 
 const LESSONS_FOLDER = '/lessons';
 const LESSONS = [
@@ -88,6 +95,8 @@ const LESSONS = [
 ];
 
 function App() {
+  const snapshot = useProxy(state, { sync: true });
+
   return (
     <main>
       <Aside>
@@ -101,7 +110,7 @@ function App() {
       </Aside>
 
       <Canvas
-        colorManagement={false}
+        colorManagement={snapshot.colorManagement}
         camera={{
           aspect: 2,
           far: 100,
@@ -110,8 +119,8 @@ function App() {
           position: [1, 1, 2],
         }}
         shadowMap={{
-          enabled: false,
-          type: PCFSoftShadowMap,
+          enabled: snapshot.shadowMapEnabled,
+          type: snapshot.shadowMapType,
         }}
       >
         <Suspense fallback={null}>
