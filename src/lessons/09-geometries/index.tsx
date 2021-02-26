@@ -10,7 +10,6 @@ export default function Scene() {
 
   useEffect(() => {
     const arr = new Float32Array(length);
-
     [...Array(length)].map((_, i) => (arr[i] = Math.random() - 0.5));
 
     if (geometry.current) {
