@@ -6,6 +6,8 @@ import {
   Group,
   Texture,
 } from 'three';
+import Bush from './Bush';
+import Door from './Door';
 import Roof from './Roof';
 
 const WALLS_SIZE = 4;
@@ -40,12 +42,12 @@ export default function House() {
   return (
     <group ref={houseRef}>
       <Roof />
+      <Door />
 
       <Box
         args={[WALLS_SIZE, WALLS_HEIGHT, WALLS_SIZE]}
         castShadow
         ref={wallsRef}
-        rotation-y={Math.PI * 0.25}
         position-y={WALLS_HEIGHT / 2}
       >
         <meshStandardMaterial
@@ -55,6 +57,10 @@ export default function House() {
           roughnessMap={bricksRoughnessTexture}
         />
       </Box>
+
+      <Bush position={[0.8, 0.2, 2.2]} scale={[0.5, 0.5, 0.5]} />
+      <Bush position={[1.4, 0.1, 2.1]} scale={[0.25, 0.25, 0.25]} />
+      <Bush position={[-0.8, 0.1, 2.2]} scale={[0.4, 0.4, 0.4]} />
     </group>
   );
 }

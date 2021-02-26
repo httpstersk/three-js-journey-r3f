@@ -15,6 +15,7 @@ export default function Roof() {
       args={[ROOF_SIZE, ROOF_HEIGHT, ROOF_SIDES]}
       castShadow
       ref={roofRef}
+      rotation-y={Math.PI * 0.25}
       position-y={WALLS_HEIGHT + ROOF_HEIGHT / 2}
     >
       <meshStandardMaterial color={0xb35f45} />
