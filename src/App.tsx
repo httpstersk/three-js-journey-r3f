@@ -129,7 +129,7 @@ function App() {
           ))}
         </Suspense>
 
-        <OrbitControls />
+        <OrbitControls maxPolarAngle={Math.PI / 2} minPolarAngle={0} />
       </Canvas>
     </main>
   );
