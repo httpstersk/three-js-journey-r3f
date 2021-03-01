@@ -1,8 +1,9 @@
 import { Plane, useTexture } from '@react-three/drei';
 import { useEffect, useRef } from 'react';
 import { Float32BufferAttribute, PlaneBufferGeometry, Texture } from 'three';
+import { WALLS_SIZE } from './House';
 
-const DOOR_SIZE = 2;
+const DOOR_SIZE = 2.2;
 
 export default function Door() {
   const doorRef = useRef<PlaneBufferGeometry>();
@@ -39,7 +40,7 @@ export default function Door() {
     <Plane
       args={[DOOR_SIZE, DOOR_SIZE, 100, 100]}
       position-y={1}
-      position-z={DOOR_SIZE + 0.01}
+      position-z={WALLS_SIZE / 2 + 0.001}
       receiveShadow
       ref={doorRef}
     >

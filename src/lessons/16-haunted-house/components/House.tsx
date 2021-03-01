@@ -10,7 +10,7 @@ import Bush from './Bush';
 import Door from './Door';
 import Roof from './Roof';
 
-const WALLS_SIZE = 4;
+export const WALLS_SIZE = 4;
 export const WALLS_HEIGHT = 2.5;
 
 export default function House() {
