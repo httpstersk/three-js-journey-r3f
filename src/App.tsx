@@ -26,7 +26,7 @@ import 'App.css';
 
 export const state = proxy({
   colorManagement: true,
-  shadowMapEnabled: false,
+  shadowMapEnabled: true,
   shadowMapType: PCFSoftShadowMap,
 });
 
