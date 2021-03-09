@@ -1,8 +1,8 @@
 import { forwardRef } from 'react';
-import { PointLight } from 'three';
+import { Color, PointLight } from 'three';
 
-const Ghost = forwardRef<PointLight, { color: string }>(({ color }, ref) => {
+const Ghosts = forwardRef<PointLight, { color: Color }>(({ color }, ref) => {
   return <pointLight castShadow args={[color, 2, 3]} ref={ref} />;
 });
 
-export default Ghost;
+export default Ghosts;

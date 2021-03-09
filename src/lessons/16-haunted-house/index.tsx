@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useThree } from 'react-three-fiber';
 import { Fog } from 'three';
 import Floor from './components/Floor';
+import Ghosts from './components/Ghosts';
 import Graves from './components/Graves';
 import House from './components/House';
 import { AmbientLight, DoorLight, MoonLight } from './lights';
@@ -28,6 +29,7 @@ export default function Scene() {
 
       <House />
       <Graves />
+      <Ghosts />
       <Floor />
 
       <PerspectiveCamera

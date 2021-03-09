@@ -14,7 +14,11 @@ export default function Graves({ ...props }) {
         const rotZ = (Math.random() - 0.5) * 0.4;
 
         return (
-          <Grave position={[posX, 0.3, posZ]} rotation={[0, rotY, rotZ]} />
+          <Grave
+            key={i}
+            position={[posX, 0.3, posZ]}
+            rotation={[0, rotY, rotZ]}
+          />
         );
       })}
     </group>
