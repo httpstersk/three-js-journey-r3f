@@ -11,28 +11,24 @@ export default function Ghosts({ ...props }) {
   useFrame(({ clock }) => {
     if (ghostRef1.current && ghostRef2.current && ghostRef3.current) {
       const elapsedTime = clock.getElapsedTime();
-      console.log(elapsedTime);
 
       const ghost1Angle = elapsedTime * 0.5;
-      const ghost1Position = ghostRef1.current.position;
-      ghost1Position.x = Math.cos(ghost1Angle) * 4;
-      ghost1Position.z = Math.sin(ghost1Angle) * 4;
-      ghost1Position.y = Math.sin(elapsedTime * 3);
+      ghostRef1.current.position.x = Math.cos(ghost1Angle) * 4;
+      ghostRef1.current.position.z = Math.sin(ghost1Angle) * 4;
+      ghostRef1.current.position.y = Math.sin(elapsedTime * 3);
 
       const ghost2Angle = -elapsedTime * 0.32;
-      const ghost2Position = ghostRef2.current.position;
-      ghost2Position.x = Math.cos(ghost2Angle) * 5;
-      ghost2Position.z = Math.sin(ghost2Angle) * 5;
-      ghost2Position.y =
+      ghostRef2.current.position.x = Math.cos(ghost2Angle) * 5;
+      ghostRef2.current.position.z = Math.sin(ghost2Angle) * 5;
+      ghostRef2.current.position.y =
         Math.sin(elapsedTime * 4) + Math.sin(elapsedTime * 2.5);
 
       const ghost3Angle = -elapsedTime * 0.18;
-      const ghost3Position = ghostRef3.current.position;
-      ghost3Position.x =
+      ghostRef3.current.position.x =
         Math.cos(ghost3Angle) * (7 + Math.sin(elapsedTime * 0.32));
-      ghost3Position.z =
+      ghostRef3.current.position.z =
         Math.sin(ghost3Angle) * (7 + Math.sin(elapsedTime * 0.5));
-      ghost3Position.y =
+      ghostRef3.current.position.y =
         Math.sin(elapsedTime * 4) + Math.sin(elapsedTime * 2.5);
     }
   });

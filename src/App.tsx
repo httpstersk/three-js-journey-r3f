@@ -31,68 +31,75 @@ export const state = proxy({
 });
 
 const LESSONS_FOLDER = '/lessons';
-const LESSONS = [
-  {
-    title: 'Basic Scene',
-    path: `${LESSONS_FOLDER}/03-basic-scene`,
-    component: BasicScene,
-  },
-  {
-    title: 'Transforms Objects',
-    path: `${LESSONS_FOLDER}/05-transforms-objects`,
-    component: TransformObjects,
-  },
-  {
-    title: 'Animations',
-    path: `${LESSONS_FOLDER}/06-animations`,
-    component: Animations,
-  },
-  {
-    title: 'Cameras',
-    path: `${LESSONS_FOLDER}/07-cameras`,
-    component: Cameras,
-  },
-  {
-    title: 'Geometries',
-    path: `${LESSONS_FOLDER}/09-geometries`,
-    component: Geometries,
-  },
-  {
-    title: 'Debug UI',
-    path: `${LESSONS_FOLDER}/10-debug-ui`,
-    component: DebugUI,
-  },
-  {
-    title: 'Textures',
-    path: `${LESSONS_FOLDER}/11-textures`,
-    component: Textures,
-  },
-  {
-    title: 'Materials',
-    path: `${LESSONS_FOLDER}/12-materials`,
-    component: Materials,
-  },
-  {
-    title: '3D Text',
-    path: `${LESSONS_FOLDER}/13-3d-text`,
-    component: Text3D,
-  },
-  {
-    title: 'Lights',
-    path: `${LESSONS_FOLDER}/14-lights`,
-    component: Lights,
-  },
-  {
-    title: 'Shadows',
-    path: `${LESSONS_FOLDER}/15-shadows`,
-    component: Shadows,
-  },
-  {
-    title: 'Haunted House',
-    path: `${LESSONS_FOLDER}/16-haunted-house`,
-    component: HauntedHouse,
-  },
-];
+const THE_COURSE = {
+  basics: [
+    {
+      title: 'Basic Scene',
+      path: `${LESSONS_FOLDER}/03-basic-scene`,
+      component: BasicScene,
+    },
+    {
+      title: 'Transforms Objects',
+      path: `${LESSONS_FOLDER}/05-transforms-objects`,
+      component: TransformObjects,
+    },
+    {
+      title: 'Animations',
+      path: `${LESSONS_FOLDER}/06-animations`,
+      component: Animations,
+    },
+    {
+      title: 'Cameras',
+      path: `${LESSONS_FOLDER}/07-cameras`,
+      component: Cameras,
+    },
+    {
+      title: 'Geometries',
+      path: `${LESSONS_FOLDER}/09-geometries`,
+      component: Geometries,
+    },
+    {
+      title: 'Debug UI',
+      path: `${LESSONS_FOLDER}/10-debug-ui`,
+      component: DebugUI,
+    },
+    {
+      title: 'Textures',
+      path: `${LESSONS_FOLDER}/11-textures`,
+      component: Textures,
+    },
+    {
+      title: 'Materials',
+      path: `${LESSONS_FOLDER}/12-materials`,
+      component: Materials,
+    },
+    {
+      title: '3D Text',
+      path: `${LESSONS_FOLDER}/13-3d-text`,
+      component: Text3D,
+    },
+  ],
+  classic: [
+    {
+      title: 'Lights',
+      path: `${LESSONS_FOLDER}/14-lights`,
+      component: Lights,
+    },
+    {
+      title: 'Shadows',
+      path: `${LESSONS_FOLDER}/15-shadows`,
+      component: Shadows,
+    },
+    {
+      title: 'Haunted House',
+      path: `${LESSONS_FOLDER}/16-haunted-house`,
+      component: HauntedHouse,
+    },
+  ],
+};
+
+const lessons = new Map(Object.entries(THE_COURSE));
+const LESSONS = [...lessons].flatMap(([chapter, lesson]) => lesson);
 
 function App() {
   const snapshot = useProxy(state, { sync: true });
