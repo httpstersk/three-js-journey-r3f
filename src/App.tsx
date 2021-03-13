@@ -2,7 +2,7 @@ import { OrbitControls } from '@react-three/drei';
 import { Suspense } from 'react';
 import { Canvas } from 'react-three-fiber';
 import { PCFSoftShadowMap } from 'three';
-import { proxy, useProxy } from 'valtio';
+import { proxy, useSnapshot } from 'valtio';
 import { Route } from 'wouter';
 
 import BasicScene from 'lessons/03-basic-scene';
@@ -17,6 +17,7 @@ import Text3D from 'lessons/13-3d-text';
 import Lights from 'lessons/14-lights';
 import Shadows from 'lessons/15-shadows';
 import HauntedHouse from 'lessons/16-haunted-house';
+import Particles from 'lessons/17-particles';
 
 import Aside from 'components/Aside';
 import LessonLink from 'components/LessonLink';
@@ -95,6 +96,11 @@ const THE_COURSE = {
       path: `${LESSONS_FOLDER}/16-haunted-house`,
       component: HauntedHouse,
     },
+    {
+      title: 'Particles',
+      path: `${LESSONS_FOLDER}/17-particles`,
+      component: Particles,
+    },
   ],
 };
 
@@ -102,7 +108,7 @@ const lessons = new Map(Object.entries(THE_COURSE));
 const LESSONS = [...lessons].flatMap(([chapter, lesson]) => lesson);
 
 function App() {
-  const snapshot = useProxy(state, { sync: true });
+  const snapshot = useSnapshot(state, { sync: true });
 
   return (
     <main>

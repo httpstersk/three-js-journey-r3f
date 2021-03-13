@@ -16,7 +16,7 @@ const Wrapper = styled(Link)`
   color: #fff;
   display: inline-flex;
   flex-direction: row;
-  font-size: 2rem;
+  font-size: 1.2rem;
   font-weight: 400;
   text-decoration: none;
 `;
