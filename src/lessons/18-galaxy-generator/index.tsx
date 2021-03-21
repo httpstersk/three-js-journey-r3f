@@ -1,24 +1,34 @@
 import React, { useMemo } from 'react';
 import { AdditiveBlending, BufferAttribute, BufferGeometry } from 'three';
+import { useTweaks } from 'use-tweaks';
 
-interface IProps {
-  size: number;
-}
+interface IProps {}
 
-const Particles: React.FC<IProps> = ({ size }) => {
+const Galaxy: React.FC<IProps> = () => {
   const COUNT = 5000;
   const VERTICES = 3;
   const VERTEX_SIZE = 3;
-  const length = COUNT * VERTEX_SIZE;
+
+  const { count, size } = useTweaks('Galaxy Generator', {
+    count: {
+      value: COUNT,
+      min: Math.floor(Math.sqrt(COUNT)),
+      max: COUNT * 2,
+      step: 1,
+    },
+    size: { value: 0.01, min: 0.005, max: 0.1, step: 0.001 },
+  });
+
+  console.log(count);
 
   const geometry = useMemo(() => {
     let geometry = new BufferGeometry();
 
-    const colors = new Float32Array(length);
-    [...Array(length)].map((_, i) => colors[i]);
+    const colors = new Float32Array(count * VERTEX_SIZE);
+    [...Array(count * VERTEX_SIZE)].map((_, i) => colors[i]);
 
-    const positions = new Float32Array(length);
-    [...Array(length)].map((_, i) => {
+    const positions = new Float32Array(count * VERTEX_SIZE);
+    [...Array(count * VERTEX_SIZE)].map((_, i) => {
       const i3 = i * VERTICES;
       positions[i3] = (Math.random() - 0.5) * 3;
       positions[i3 + 1] = (Math.random() - 0.5) * 3;
@@ -35,7 +45,7 @@ const Particles: React.FC<IProps> = ({ size }) => {
     );
 
     return geometry;
-  }, [length]);
+  }, [count]);
 
   return (
     <points>
@@ -51,5 +61,5 @@ const Particles: React.FC<IProps> = ({ size }) => {
 };
 
 export default function Scene() {
-  return <Particles size={0.01} />;
+  return <Galaxy />;
 }
