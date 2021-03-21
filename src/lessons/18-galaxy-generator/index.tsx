@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { AdditiveBlending, BufferAttribute, BufferGeometry } from 'three';
-import { useTweaks } from 'use-tweaks';
+import { useControls } from 'leva';
 
 interface IProps {}
 
@@ -9,12 +9,12 @@ const Galaxy: React.FC<IProps> = () => {
   const VERTICES = 3;
   const VERTEX_SIZE = 3;
 
-  const { count, size } = useTweaks('Galaxy Generator', {
+  const { count, size } = useControls({
     count: {
-      value: COUNT,
       min: Math.floor(Math.sqrt(COUNT)),
       max: COUNT * 2,
       step: 1,
+      value: COUNT,
     },
     size: { value: 0.01, min: 0.005, max: 0.1, step: 0.001 },
   });

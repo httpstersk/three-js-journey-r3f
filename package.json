@@ -1,11 +1,12 @@
 {
   "name": "threejs-journey-r3f",
-  "version": "0.18.1",
+  "version": "0.18.2",
   "private": true,
   "dependencies": {
     "@react-three/drei": "^3.11.1",
     "@react-three/flex": "^0.5.2",
     "gsap": "^3.6.0",
+    "leva": "^0.8.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.3",
