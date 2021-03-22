@@ -9,7 +9,8 @@ const Galaxy: React.FC<IProps> = () => {
   const VERTICES = 3;
   const VERTEX_SIZE = 3;
 
-  const { count, radius, size } = useControls({
+  const { branches, count, radius, size } = useControls({
+    branches: { min: 2, max: 20, step: 1, value: 5 },
     count: {
       min: Math.floor(Math.sqrt(COUNT)),
       max: COUNT * 2,
@@ -30,9 +31,12 @@ const Galaxy: React.FC<IProps> = () => {
     [...Array(count * VERTEX_SIZE)].map((_, i) => {
       const i3 = i * VERTICES;
       const r = Math.random() * radius;
-      positions[i3] = r;
+      const branchesAngle = ((i % branches) / branches) * Math.PI * 2;
+
+      positions[i3] = Math.cos(branchesAngle) * r;
       positions[i3 + 1] = 0;
-      positions[i3 + 2] = 0;
+      positions[i3 + 2] = Math.sin(branchesAngle) * r;
+
       return positions;
     });
 
@@ -44,7 +48,7 @@ const Galaxy: React.FC<IProps> = () => {
     );
 
     return geometry;
-  }, [count, radius]);
+  }, [branches, count, radius]);
 
   return (
     <points>
