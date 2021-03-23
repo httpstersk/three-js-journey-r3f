@@ -1,6 +1,6 @@
 {
   "name": "threejs-journey-r3f",
-  "version": "0.18.6",
+  "version": "0.18.7",
   "private": true,
   "dependencies": {
     "@react-three/drei": "^3.11.1",

@@ -1,16 +1,23 @@
 import React, { useMemo } from 'react';
-import { AdditiveBlending, BufferAttribute, BufferGeometry } from 'three';
+import {
+  AdditiveBlending,
+  BufferAttribute,
+  BufferGeometry,
+  Color,
+} from 'three';
 import { useControls } from 'leva';
 
 interface IProps {}
 
 const Galaxy: React.FC<IProps> = () => {
-  const COUNT = 5000;
+  const COUNT = 30000;
   const VERTICES = 3;
   const VERTEX_SIZE = 3;
 
   const {
     branches,
+    colorI,
+    colorO,
     count,
     radius,
     randomness,
@@ -19,6 +26,8 @@ const Galaxy: React.FC<IProps> = () => {
     spin,
   } = useControls({
     branches: { min: 2, max: 20, step: 1, value: 5 },
+    colorI: '#ff6030',
+    colorO: '#1b3984',
     count: {
       min: Math.floor(Math.sqrt(COUNT)),
       max: 100_000,
@@ -34,16 +43,19 @@ const Galaxy: React.FC<IProps> = () => {
 
   const geometry = useMemo(() => {
     let geometry = new BufferGeometry();
+    const iteratios = count * VERTEX_SIZE;
+    const colors = new Float32Array(iteratios);
+    const positions = new Float32Array(iteratios);
 
-    const colors = new Float32Array(count * VERTEX_SIZE);
-    [...Array(count * VERTEX_SIZE)].map((_, i) => colors[i]);
-
-    const positions = new Float32Array(count * VERTEX_SIZE);
-    [...Array(count * VERTEX_SIZE)].map((_, i) => {
+    [...Array(iteratios)].map((_, i) => {
       const i3 = i * VERTICES;
       const r = Math.random() * radius;
+
       const branchesAngle = ((i % branches) / branches) * Math.PI * 2;
       const spinAngle = r * spin;
+
+      const mixedColor = new Color(colorI).clone();
+      mixedColor.lerp(new Color(colorO), r / radius);
 
       const getRandom = () =>
         Math.pow(Math.random(), randomnessPower) *
@@ -59,6 +71,10 @@ const Galaxy: React.FC<IProps> = () => {
       positions[i3 + 1] = randomY;
       positions[i3 + 2] = Math.sin(branchesAngle + spinAngle) * r + randomZ;
 
+      colors[i3] = mixedColor.r;
+      colors[i3 + 1] = mixedColor.g;
+      colors[i3 + 2] = mixedColor.b;
+
       return positions;
     });
 
@@ -70,7 +86,16 @@ const Galaxy: React.FC<IProps> = () => {
     );
 
     return geometry;
-  }, [branches, count, radius, randomness, randomnessPower, spin]);
+  }, [
+    branches,
+    count,
+    colorI,
+    colorO,
+    radius,
+    randomness,
+    randomnessPower,
+    spin,
+  ]);
 
   return (
     <points>
@@ -79,7 +104,8 @@ const Galaxy: React.FC<IProps> = () => {
         blending={AdditiveBlending}
         depthWrite={false}
         size={size}
-        sizeAttenuation={true}
+        sizeAttenuation
+        vertexColors
       />
     </points>
   );
