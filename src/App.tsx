@@ -19,6 +19,7 @@ import Shadows from 'lessons/15-shadows';
 import HauntedHouse from 'lessons/16-haunted-house';
 import Particles from 'lessons/17-particles';
 import GalaxyGenerator from 'lessons/18-galaxy-generator';
+import Raycaster from 'lessons/19-raycaster';
 
 import Aside from 'components/Aside';
 import LessonLink from 'components/LessonLink';
@@ -106,6 +107,11 @@ const THE_COURSE = {
       title: 'Galaxy Generator',
       path: `${LESSONS_FOLDER}/18-galaxy-generator`,
       component: GalaxyGenerator,
+    },
+    {
+      title: 'Raycaster',
+      path: `${LESSONS_FOLDER}/19-raycaster`,
+      component: Raycaster,
     },
   ],
 };
