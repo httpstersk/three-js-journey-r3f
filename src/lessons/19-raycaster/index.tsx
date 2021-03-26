@@ -1,14 +1,14 @@
 import { Sphere } from '@react-three/drei';
 import { useRef } from 'react';
 import { useFrame, useResource, useThree } from 'react-three-fiber';
-import { Group, Mesh, MeshStandardMaterial, Vector3 } from 'three';
+import { Group, Mesh, MeshBasicMaterial, Vector3 } from 'three';
 
 export default function Scene() {
   const groupRef = useRef<Group>();
   const object1Ref = useRef<Mesh>();
   const object2Ref = useRef<Mesh>();
   const object3Ref = useRef<Mesh>();
-  const material = useResource<MeshStandardMaterial>();
+  const material = useResource<MeshBasicMaterial>();
   const { raycaster } = useThree();
 
   useFrame(({ clock }) => {
@@ -20,17 +20,33 @@ export default function Scene() {
     raycaster.set(rayOrigin, rayDirection);
 
     if (object1Ref.current && object2Ref.current && object3Ref.current) {
-      const intersects = raycaster.intersectObjects([
+      const objectsToTest = [
         object1Ref.current,
         object2Ref.current,
         object3Ref.current,
-      ]);
-
-      console.log(intersects.length);
+      ];
 
       object1Ref.current.position.y = Math.sin(elapsedTime * 0.3) * 1.5;
       object2Ref.current.position.y = Math.sin(elapsedTime * 0.8) * 1.5;
       object3Ref.current.position.y = Math.sin(elapsedTime * 1.4) * 1.5;
+
+      const intersects = raycaster.intersectObjects(objectsToTest);
+
+      objectsToTest.map((object) => {
+        if (object.material instanceof MeshBasicMaterial) {
+          return object.material.color.set(0xff0000);
+        }
+
+        return object;
+      });
+
+      intersects.map((intersect) => {
+        if (intersect.object instanceof Mesh) {
+          return intersect.object.material.color.set(0x0000ff);
+        }
+
+        return intersect;
+      });
     }
   });
 
