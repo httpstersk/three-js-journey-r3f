@@ -9,15 +9,13 @@ export default function Scene() {
   const object2Ref = useRef<Mesh>();
   const object3Ref = useRef<Mesh>();
   const material = useResource<MeshBasicMaterial>();
-  const { raycaster } = useThree();
+  const { camera, raycaster } = useThree();
+  const rayDirection = new Vector3(10, 0, 0);
+  rayDirection.normalize();
 
-  useFrame(({ clock }) => {
-    const elapsedTime = clock.getElapsedTime();
-    const rayOrigin = new Vector3(-3, 0, 0);
-    const rayDirection = new Vector3(10, 0, 0);
-
-    rayDirection.normalize();
-    raycaster.set(rayOrigin, rayDirection);
+  useFrame(({ clock, mouse }) => {
+    const elapsedTime = clock.elapsedTime;
+    raycaster.setFromCamera(mouse, camera);
 
     if (object1Ref.current && object2Ref.current && object3Ref.current) {
       const objectsToTest = [
@@ -32,21 +30,29 @@ export default function Scene() {
 
       const intersects = raycaster.intersectObjects(objectsToTest);
 
-      objectsToTest.map((object) => {
-        if (object.material instanceof MeshBasicMaterial) {
-          return object.material.color.set(0xff0000);
-        }
+      if (intersects.length) {
+        intersects.map((intersect) => {
+          if (intersect.object instanceof Mesh) {
+            return intersect.object.material.color.set(0x0000ff);
+          }
 
-        return object;
-      });
+          return intersect;
+        });
 
-      intersects.map((intersect) => {
-        if (intersect.object instanceof Mesh) {
-          return intersect.object.material.color.set(0x0000ff);
-        }
+        objectsToTest
+          .filter((object) =>
+            intersects.find((intersect) => {
+              return intersect.object === object;
+            })
+          )
+          .map((object) => {
+            if (object.material instanceof MeshBasicMaterial) {
+              return object.material.color.set(0xff0000);
+            }
 
-        return intersect;
-      });
+            return object;
+          });
+      }
     }
   });
 
