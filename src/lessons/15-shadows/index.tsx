@@ -1,7 +1,7 @@
 import { Plane, Sphere, useTexture } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useControls } from 'leva';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Mesh, MeshBasicMaterial, MeshStandardMaterial, Texture } from 'three';
 import {
   DirectionalLightWithHelper,
@@ -16,7 +16,7 @@ export default function Scene() {
   const sphereRef = useRef<Mesh>();
   const sphereShadowRef = useRef<Mesh>();
   const sphereShadowMaterialRef = useRef<MeshBasicMaterial>();
-  const material = useRef<MeshStandardMaterial>();
+  const [material, materialRef] = useState<MeshStandardMaterial>();
   const simpleShadow = useTexture('/textures/simpleShadow.jpg') as Texture;
 
   const { metalness, roughness } = useControls('Material', {
@@ -50,22 +50,22 @@ export default function Scene() {
 
       <meshStandardMaterial
         metalness={metalness}
-        ref={material}
+        ref={materialRef}
         roughness={roughness}
       />
 
-      {material.current && (
+      {material && (
         <group>
           <Sphere
             args={[SPHERE_SIZE, 32, 32]}
             castShadow
-            material={material.current}
+            material={material}
             ref={sphereRef}
           />
 
           <Plane
             args={[PLANE_SIZE, PLANE_SIZE]}
-            material={material.current}
+            material={material}
             receiveShadow
             rotation-x={-Math.PI * 0.5}
             position-y={-SPHERE_SIZE}

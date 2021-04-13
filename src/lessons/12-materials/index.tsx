@@ -1,6 +1,6 @@
 import { Plane, Sphere, Torus, useCubeTexture } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Group, Mesh, MeshStandardMaterial } from 'three';
 
 const LIGHT_COLOR = 0xffffff;
@@ -9,7 +9,7 @@ const LIGHT_INTESITY = 1;
 export default function Scene() {
   const groupRef = useRef<Group>();
   const meshRef = useRef<Mesh>();
-  const material = useRef<MeshStandardMaterial>();
+  const [material, materialRef] = useState<MeshStandardMaterial>();
 
   const envMap = useCubeTexture(
     ['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg'],
@@ -30,27 +30,23 @@ export default function Scene() {
         <meshStandardMaterial
           envMap={envMap}
           metalness={1}
-          ref={material}
+          ref={materialRef}
           roughness={0}
         />
 
-        {material.current && (
+        {material && (
           <group ref={groupRef}>
             <Sphere
               args={[0.5, 64, 64]}
-              material={material.current}
+              material={material}
               position={[-1.5, 0, 0]}
             />
 
-            <Plane
-              args={[1, 1, 100, 100]}
-              material={material.current}
-              ref={meshRef}
-            />
+            <Plane args={[1, 1, 100, 100]} material={material} ref={meshRef} />
 
             <Torus
               args={[0.3, 0.2, 64, 128]}
-              material={material.current}
+              material={material}
               position={[1.5, 0, 0]}
             />
           </group>

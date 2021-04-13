@@ -1,6 +1,6 @@
 import { Center, useTexture } from '@react-three/drei';
 import { MeshProps, useLoader } from '@react-three/fiber';
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   FontLoader,
   MeshStandardMaterial,
@@ -72,16 +72,18 @@ const Donuts: React.FC<DonutsProps> = ({ material }) => {
 };
 
 export default function Scene() {
-  const material = useRef<MeshStandardMaterial>();
+  const [material, materialRef] = useState<MeshStandardMaterial>();
+
   const matcap = useTexture('/textures/matcaps/8.png') as Texture;
 
   return (
     <mesh>
-      <meshMatcapMaterial ref={material} matcap={matcap} />
-      {material.current && (
+      <meshMatcapMaterial ref={materialRef} matcap={matcap} />
+
+      {material && (
         <group>
-          <Donuts material={material.current} />
-          <Text material={material.current}>Good</Text>
+          <Donuts material={material} />
+          <Text material={material}>Good</Text>
         </group>
       )}
     </mesh>

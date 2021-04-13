@@ -1,5 +1,5 @@
 import { Box, Plane, Sphere, Torus } from '@react-three/drei';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Group, Mesh, MeshStandardMaterial } from 'three';
 import {
   AmbientLight,
@@ -16,7 +16,7 @@ const PLANE_SIZE = 5;
 export default function Scene() {
   const groupRef = useRef<Group>();
   const meshRef = useRef<Mesh>();
-  const material = useRef<MeshStandardMaterial>();
+  const [material, materialRef] = useState<MeshStandardMaterial>();
 
   return (
     <>
@@ -57,31 +57,31 @@ export default function Scene() {
         position={[0, 2, 3]}
       />
 
-      <meshStandardMaterial ref={material} roughness={0.4} />
+      <meshStandardMaterial ref={materialRef} roughness={0.4} />
 
-      {material.current && (
+      {material && (
         <group ref={groupRef}>
           <Sphere
             args={[0.5, 32, 32]}
-            material={material.current}
+            material={material}
             position={[-1.5, 0, 0]}
           />
 
           <Box
             args={[CUBE_SIZE, CUBE_SIZE, CUBE_SIZE]}
-            material={material.current}
+            material={material}
             ref={meshRef}
           />
 
           <Torus
             args={[0.3, 0.2, 32, 64]}
-            material={material.current}
+            material={material}
             position={[1.5, 0, 0]}
           />
 
           <Plane
             args={[PLANE_SIZE, PLANE_SIZE]}
-            material={material.current}
+            material={material}
             rotation-x={-Math.PI * 0.5}
             position-y={-0.65}
           />
