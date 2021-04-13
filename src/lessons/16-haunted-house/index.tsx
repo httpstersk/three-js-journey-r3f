@@ -11,7 +11,8 @@ import { AmbientLight, DoorLight, MoonLight } from './lights';
 const FOG_COLOR = 0x262837;
 
 export default function Scene() {
-  const { scene, gl } = useThree();
+  const scene = useThree((state) => state.scene);
+  const gl = useThree((state) => state.gl);
 
   useEffect(() => {
     scene.fog = new Fog(FOG_COLOR, 1, 15);

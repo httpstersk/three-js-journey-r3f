@@ -17,7 +17,8 @@ export default function Scene() {
   const object1Ref = useRef<Mesh>();
   const object2Ref = useRef<Mesh>();
   const object3Ref = useRef<Mesh>();
-  const { camera, raycaster } = useThree();
+  const camera = useThree((state) => state.camera);
+  const raycaster = useThree((state) => state.raycaster);
 
   useFrame(({ clock, mouse }) => {
     const elapsedTime = clock.elapsedTime;
