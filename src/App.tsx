@@ -142,10 +142,11 @@ function App() {
           near: 0.1,
           position: [1, 1, 2],
         }}
-        // shadowMap={{
-        //   enabled: snapshot.shadowMapEnabled,
-        //   type: snapshot.shadowMapType,
-        // }}
+        linear={snapshot.colorManagement}
+        shadows={{
+          enabled: snapshot.shadowMapEnabled,
+          type: snapshot.shadowMapType,
+        }}
       >
         <Suspense fallback={null}>
           {LESSONS.map(({ component, path }) => (

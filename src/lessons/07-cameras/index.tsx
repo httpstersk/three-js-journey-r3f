@@ -7,7 +7,7 @@ import Cube from 'components/Cube';
 export default function Scene() {
   const camera = useRef<PerspectiveCameraType>();
   const cursor = useRef(new Vector2(0, 0));
-  const { setDefaultCamera } = useThree();
+  const set = useThree((state) => state.set);
 
   const onMouseMove = ({ clientX, clientY }: any) => {
     const { innerHeight, innerWidth } = window;
@@ -17,9 +17,9 @@ export default function Scene() {
 
   useEffect(() => {
     if (camera.current) {
-      setDefaultCamera(camera.current);
+      set({ camera: camera.current });
     }
-  }, [camera, setDefaultCamera]);
+  }, [camera, set]);
 
   useEffect(() => {
     window.addEventListener('mousemove', onMouseMove);
