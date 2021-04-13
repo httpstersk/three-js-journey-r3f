@@ -1,6 +1,6 @@
 import { PerspectiveCamera } from '@react-three/drei';
 import { useEffect } from 'react';
-import { useThree } from 'react-three-fiber';
+import { useThree } from '@react-three/fiber';
 import { Fog } from 'three';
 import Floor from './components/Floor';
 import Ghosts from './components/Ghosts';

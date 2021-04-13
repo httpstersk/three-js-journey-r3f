@@ -1,6 +1,6 @@
 import { useTexture } from '@react-three/drei';
 import React, { useMemo } from 'react';
-import { useFrame } from 'react-three-fiber';
+import { useFrame } from '@react-three/fiber';
 import {
   AdditiveBlending,
   BufferAttribute,

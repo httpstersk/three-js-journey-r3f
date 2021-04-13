@@ -1,14 +1,13 @@
-import { useRef } from 'react';
-import { useFrame, useResource } from 'react-three-fiber';
 import { Plane, Sphere, useTexture } from '@react-three/drei';
-import { Mesh, MeshBasicMaterial, MeshStandardMaterial } from 'three';
+import { useFrame } from '@react-three/fiber';
+import { useRef } from 'react';
+import { Mesh, MeshBasicMaterial, MeshStandardMaterial, Texture } from 'three';
+import { useTweaks } from 'use-tweaks';
 import {
   DirectionalLightWithHelper,
   PointLightWithHelper,
   SpotLightWithHelper,
 } from './lights/';
-import { useTweaks } from 'use-tweaks';
-import { Texture } from 'three';
 
 const PLANE_SIZE = 5;
 const SPHERE_SIZE = PLANE_SIZE / 10;
@@ -17,7 +16,7 @@ export default function Scene() {
   const sphereRef = useRef<Mesh>();
   const sphereShadowRef = useRef<Mesh>();
   const sphereShadowMaterialRef = useRef<MeshBasicMaterial>();
-  const material = useResource<MeshStandardMaterial>();
+  const material = useRef<MeshStandardMaterial>();
   const simpleShadow = useTexture('/textures/simpleShadow.jpg') as Texture;
 
   const { metalness, roughness } = useTweaks('Material', {

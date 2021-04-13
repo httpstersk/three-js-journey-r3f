@@ -1,6 +1,6 @@
-import { useRef } from 'react';
-import { useFrame, useResource } from 'react-three-fiber';
 import { Plane, Sphere, Torus, useCubeTexture } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
+import { useRef } from 'react';
 import { Group, Mesh, MeshStandardMaterial } from 'three';
 
 const LIGHT_COLOR = 0xffffff;
@@ -9,7 +9,7 @@ const LIGHT_INTESITY = 1;
 export default function Scene() {
   const groupRef = useRef<Group>();
   const meshRef = useRef<Mesh>();
-  const material = useResource<MeshStandardMaterial>();
+  const material = useRef<MeshStandardMaterial>();
 
   const envMap = useCubeTexture(
     ['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg'],

@@ -1,6 +1,5 @@
 import { Box, Plane, Sphere, Torus } from '@react-three/drei';
 import { useRef } from 'react';
-import { useResource } from 'react-three-fiber';
 import { Group, Mesh, MeshStandardMaterial } from 'three';
 import {
   AmbientLight,
@@ -17,7 +16,7 @@ const PLANE_SIZE = 5;
 export default function Scene() {
   const groupRef = useRef<Group>();
   const meshRef = useRef<Mesh>();
-  const material = useResource<MeshStandardMaterial>();
+  const material = useRef<MeshStandardMaterial>();
 
   return (
     <>

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useFrame, useThree } from 'react-three-fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import { PerspectiveCamera } from '@react-three/drei';
 import { PerspectiveCamera as PerspectiveCameraType, Vector2 } from 'three';
 import Cube from 'components/Cube';

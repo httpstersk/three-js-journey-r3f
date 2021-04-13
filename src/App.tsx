@@ -1,6 +1,6 @@
 import { OrbitControls } from '@react-three/drei';
 import { Suspense } from 'react';
-import { Canvas } from 'react-three-fiber';
+import { Canvas } from '@react-three/fiber';
 import { PCFSoftShadowMap } from 'three';
 import { proxy, useSnapshot } from 'valtio';
 import { Route } from 'wouter';
@@ -135,7 +135,6 @@ function App() {
       </Aside>
 
       <Canvas
-        colorManagement={snapshot.colorManagement}
         camera={{
           aspect: 2,
           far: 100,
@@ -143,10 +142,10 @@ function App() {
           near: 0.1,
           position: [1, 1, 2],
         }}
-        shadowMap={{
-          enabled: snapshot.shadowMapEnabled,
-          type: snapshot.shadowMapType,
-        }}
+        // shadowMap={{
+        //   enabled: snapshot.shadowMapEnabled,
+        //   type: snapshot.shadowMapType,
+        // }}
       >
         <Suspense fallback={null}>
           {LESSONS.map(({ component, path }) => (

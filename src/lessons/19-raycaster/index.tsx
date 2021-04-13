@@ -1,6 +1,6 @@
 import { Sphere } from '@react-three/drei';
 import { useRef } from 'react';
-import { useFrame, useThree } from 'react-three-fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import { Group, Mesh, MeshBasicMaterial } from 'three';
 
 const INITIAL_OBJECT_COLOR = 0x0000ff;

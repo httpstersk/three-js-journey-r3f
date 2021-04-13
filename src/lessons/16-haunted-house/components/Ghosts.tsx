@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useFrame } from 'react-three-fiber';
+import { useFrame } from '@react-three/fiber';
 import { Color, PointLight } from 'three';
 import Ghost from './Ghost';
 
