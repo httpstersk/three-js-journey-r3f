@@ -1,26 +1,26 @@
+import CONSTANTS from 'constants/';
+import { folder, useControls } from 'leva';
 import { useRef, useState } from 'react';
 import { SpotLight } from 'three';
-import { makeButton, makeFolder, useTweaks } from 'use-tweaks';
-import CONSTANTS from 'constants/';
 
 export default function SpotLightWithHelper() {
   const [isHelperShadowOn, toggleShadowHelper] = useState(false);
 
-  const { color, intensity, x, y, z } = useTweaks('Spot Light', {
+  const { color, intensity, x, y, z } = useControls('Spot Light', {
     color: '#ffffff',
     intensity: { value: 0.5, min: 0, max: 1 },
-    ...makeFolder(
-      'Positions',
+    Positions: folder(
       {
         x: { value: 0, min: -5, max: 5 },
         y: { value: 2, min: -5, max: 5 },
         z: { value: 2, min: -5, max: 5 },
       },
-      true
+      { collapsed: true }
     ),
-    ...makeButton(`Toggle Shadow Helper`, () =>
-      toggleShadowHelper((state) => !state)
-    ),
+    'Show Helper': {
+      value: !isHelperShadowOn,
+      onChange: () => toggleShadowHelper((helper) => !helper),
+    },
   });
 
   const lightRef = useRef<SpotLight>();

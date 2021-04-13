@@ -1,8 +1,8 @@
 import { Plane, Sphere, useTexture } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
+import { useControls } from 'leva';
 import { useRef } from 'react';
 import { Mesh, MeshBasicMaterial, MeshStandardMaterial, Texture } from 'three';
-import { useTweaks } from 'use-tweaks';
 import {
   DirectionalLightWithHelper,
   PointLightWithHelper,
@@ -19,7 +19,7 @@ export default function Scene() {
   const material = useRef<MeshStandardMaterial>();
   const simpleShadow = useTexture('/textures/simpleShadow.jpg') as Texture;
 
-  const { metalness, roughness } = useTweaks('Material', {
+  const { metalness, roughness } = useControls('Material', {
     metalness: { value: 0, min: 0, max: 1 },
     roughness: { value: 0.5, min: 0, max: 1 },
   });

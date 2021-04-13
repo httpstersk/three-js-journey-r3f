@@ -1,20 +1,23 @@
-import { useRef } from 'react';
-import { makeButton, useTweaks } from 'use-tweaks';
-import { Group } from 'three';
-import gsap from 'gsap';
 import Cube from 'components/Cube';
+import gsap from 'gsap';
+import { useControls } from 'leva';
+import { useRef } from 'react';
+import { Group } from 'three';
 
 export default function Scene() {
   const groupRef = useRef<Group>();
 
-  const { color } = useTweaks('Tweaks', {
+  const { color } = useControls('Tweaks', {
     color: '#ff0000',
-    ...makeButton('Spin', () => {
-      if (groupRef.current) {
-        const { rotation } = groupRef.current;
-        gsap.to(rotation, { duration: 1, y: rotation.y + Math.PI * 2 });
-      }
-    }),
+    Spin: {
+      value: false,
+      onChange: () => {
+        if (groupRef.current) {
+          const { rotation } = groupRef.current;
+          gsap.to(rotation, { duration: 1, y: rotation.y + Math.PI * 2 });
+        }
+      },
+    },
   });
 
   return (
