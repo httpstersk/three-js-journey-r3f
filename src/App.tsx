@@ -20,6 +20,7 @@ import HauntedHouse from 'lessons/16-haunted-house';
 import Particles from 'lessons/17-particles';
 import GalaxyGenerator from 'lessons/18-galaxy-generator';
 import Raycaster from 'lessons/19-raycaster';
+import Physics from 'lessons/20-physics';
 
 import Aside from 'components/Aside';
 import LessonLink from 'components/LessonLink';
@@ -112,6 +113,11 @@ const THE_COURSE = {
       title: 'Raycaster',
       path: `${LESSONS_FOLDER}/19-raycaster`,
       component: Raycaster,
+    },
+    {
+      title: 'Physics',
+      path: `${LESSONS_FOLDER}/20-physics`,
+      component: Physics,
     },
   ],
 };
