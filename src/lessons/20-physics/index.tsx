@@ -1,19 +1,10 @@
-import { Plane, Sphere, useCubeTexture } from '@react-three/drei';
+import { Physics } from '@react-three/cannon';
 import { useFrame } from '@react-three/fiber';
-import { useRef } from 'react';
-import { Mesh } from 'three';
+import Plane from './components/Plane';
+import Sphere from './components/Sphere';
 import { AmbientLight, DirectionalLight } from './lights/';
 
-const PLANE_SIZE = 20;
-const SPHERE_SIZE = 1;
-
 export default function Scene() {
-  const sphereRef = useRef<Mesh>();
-  const envMap = useCubeTexture(
-    ['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg'],
-    { path: process.env.PUBLIC_URL + '/textures/environmentMaps/0/' }
-  );
-
   useFrame(({ clock }) => {});
 
   return (
@@ -32,28 +23,10 @@ export default function Scene() {
         shadow-radius={1}
       />
 
-      <group>
-        <Sphere args={[SPHERE_SIZE, 20, 20]} castShadow ref={sphereRef}>
-          <meshStandardMaterial
-            envMap={envMap}
-            metalness={0.3}
-            roughness={0.4}
-          />
-        </Sphere>
-
-        <Plane
-          args={[PLANE_SIZE, PLANE_SIZE]}
-          position-y={-SPHERE_SIZE}
-          receiveShadow
-          rotation-x={-Math.PI * 0.5}
-        >
-          <meshStandardMaterial
-            color={0x777777}
-            metalness={0.3}
-            roughness={0.4}
-          />
-        </Plane>
-      </group>
+      <Physics>
+        <Sphere />
+        <Plane />
+      </Physics>
     </>
   );
 }
