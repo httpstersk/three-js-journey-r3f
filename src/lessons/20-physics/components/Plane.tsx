@@ -1,13 +1,11 @@
 import { usePlane } from '@react-three/cannon';
-import React from 'react';
-import { SPHERE_SIZE } from './Sphere';
 
 export const PLANE_SIZE = 20;
 
-const Plane: React.FC = (props) => {
+const Plane = ({ ...props }) => {
   const [ref] = usePlane(() => ({
     mass: 0,
-    position: [0, -SPHERE_SIZE, 0],
+    position: [0, -1, 0],
     rotation: [-Math.PI * 0.5, 0, 0],
     ...props,
   }));

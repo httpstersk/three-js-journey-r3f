@@ -1,11 +1,16 @@
 import { Physics } from '@react-three/cannon';
-import { useFrame } from '@react-three/fiber';
+import { button, useControls } from 'leva';
+import { useState } from 'react';
 import Plane from './components/Plane';
 import Sphere from './components/Sphere';
 import { AmbientLight, DirectionalLight } from './lights/';
 
 export default function Scene() {
-  useFrame(({ clock }) => {});
+  const [spheresCount, addSphereToScene] = useState(1);
+
+  useControls('Create Sphere', {
+    Create: button(() => addSphereToScene((count) => count + 1)),
+  });
 
   return (
     <>
@@ -29,7 +34,9 @@ export default function Scene() {
           restitution: 0.7,
         }}
       >
-        <Sphere />
+        {[...Array(spheresCount)].map((_, i) => (
+          <Sphere key={i} radius={1} />
+        ))}
         <Plane />
       </Physics>
     </>
