@@ -23,7 +23,12 @@ export default function Scene() {
         shadow-radius={1}
       />
 
-      <Physics>
+      <Physics
+        defaultContactMaterial={{
+          friction: 0.1,
+          restitution: 0.7,
+        }}
+      >
         <Sphere />
         <Plane />
       </Physics>
