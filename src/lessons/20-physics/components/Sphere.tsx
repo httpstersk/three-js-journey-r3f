@@ -1,12 +1,14 @@
 import { useSphere } from '@react-three/cannon';
 import { useCubeTexture } from '@react-three/drei';
+import { useMemo } from 'react';
 
 const Sphere = ({ ...props }) => {
-  const { radius } = props;
   const envMap = useCubeTexture(
     ['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg'],
     { path: process.env.PUBLIC_URL + '/textures/environmentMaps/0/' }
   );
+
+  const radius = useMemo(() => Math.random(), []);
 
   const [ref] = useSphere(() => ({
     mass: 1,

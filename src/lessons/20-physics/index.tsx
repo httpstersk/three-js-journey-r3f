@@ -35,7 +35,7 @@ export default function Scene() {
         }}
       >
         {[...Array(spheresCount)].map((_, i) => (
-          <Sphere key={i} radius={1} />
+          <Sphere key={i} />
         ))}
         <Plane />
       </Physics>

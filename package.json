@@ -1,6 +1,6 @@
 {
   "name": "threejs-journey-r3f",
-  "version": "0.20.5",
+  "version": "0.20.6",
   "private": true,
   "dependencies": {
     "@react-three/cannon": "^1.1.1",
