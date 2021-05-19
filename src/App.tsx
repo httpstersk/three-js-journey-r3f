@@ -21,6 +21,7 @@ import Particles from 'lessons/17-particles';
 import GalaxyGenerator from 'lessons/18-galaxy-generator';
 import Raycaster from 'lessons/19-raycaster';
 import Physics from 'lessons/20-physics';
+import ImportedModels from 'lessons/21-imported-models';
 
 import Aside from 'components/Aside';
 import LessonLink from 'components/LessonLink';
@@ -118,6 +119,11 @@ const THE_COURSE = {
       title: 'Physics',
       path: `${LESSONS_FOLDER}/20-physics`,
       component: Physics,
+    },
+    {
+      title: 'Imported Models',
+      path: `${LESSONS_FOLDER}/21-imported-models`,
+      component: ImportedModels,
     },
   ],
 };
